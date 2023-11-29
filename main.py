@@ -29,9 +29,9 @@ class Window(QWidget):
 
     def draw_flag(self, painter):
         a = random.randint(10, 100)
-        r = 255
-        g = 255
-        b = 0
+        r = random.randint(0, 255)
+        g = random.randint(0, 255)
+        b = random.randint(0, 255)
         painter.setBrush(QColor(r, g, b))
         painter.drawEllipse(random.randint(0, 200), random.randint(0, 200), a, a)
         pass
