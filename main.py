@@ -1,16 +1,45 @@
-# This is a sample Python script.
+import random
+import sys
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from PyQt5.QtGui import QPainter, QColor
+from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
 
 
-# Press the green button in the gutter to run the script.
+class Window(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setGeometry(300, 300, 200, 200)
+        self.setWindowTitle('123')
+        self.btn = QPushButton('Draw', self)
+        self.btn.move(70, 150)
+        self.btn.resize(60, 40)
+        self.do_paint = False
+        self.btn.clicked.connect(self.paint)
+
+    def paintEvent(self, event):
+        if self.do_paint:
+            painter = QPainter()
+            painter.begin(self)
+            self.draw_flag(painter)
+            painter.end()
+
+    def paint(self):
+        self.do_paint = True
+        self.repaint()
+
+    def draw_flag(self, painter):
+        a = random.randint(10, 100)
+        r = 255
+        g = 255
+        b = 0
+        painter.setBrush(QColor(r, g, b))
+        painter.drawEllipse(random.randint(0, 200), random.randint(0, 200), a, a)
+        pass
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    app = QApplication(sys.argv)
+    ex = Window()
+    ex.show()
+    sys.exit(app.exec())
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
